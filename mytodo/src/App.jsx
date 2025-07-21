@@ -10,7 +10,7 @@ function App() {
   });
   
 
-  const totalPersons = tasks.reduce((sum, task) => sum + task.value, 0);
+  //const totalPersons = tasks.reduce((sum, task) => sum + task.value, 0);
 
 useEffect(()=>{
 localStorage.setItem("TodoTasks",JSON.stringify(tasks))
@@ -68,7 +68,8 @@ const resetTasks = () => {
   return (
     <>
       <Navbar
-        counter={totalPersons}//tasks.length
+        counter={tasks.length}
+        ///counter={totalPersons}
         addTask={addTask}
         resetTasks={resetTasks}
         currentTime={dateTime}
