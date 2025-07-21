@@ -1,5 +1,5 @@
 import { useState } from "react";
-function Navbar({ counter, addTask, resetTasks, currentTime }) {
+function Navbar({ counter,persons, addTask, resetPersons,resetTasks, currentTime }) {
   const [inputValue, setInputValue] = useState("");
 
   return (
@@ -8,6 +8,9 @@ function Navbar({ counter, addTask, resetTasks, currentTime }) {
         <h1 className="">Navbar</h1>
         <div className="bg-gray-400 text-white px-3 py-1 rounded-md hover:bg-gray-500">
           {counter}
+        </div>
+        <div className="bg-gray-400 text-white px-3 py-1 rounded-md hover:bg-gray-500">
+          {persons}
         </div>
         
         <input
@@ -36,9 +39,16 @@ function Navbar({ counter, addTask, resetTasks, currentTime }) {
 
         <button
           className="bg-red-500 text-white  rounded-md px-4 py-1 hover:bg-red-600"
-          onClick={resetTasks}
+          onClick={resetPersons}
         >
           Reset Number of Persons
+        </button>
+
+        <button
+          className="bg-red-500 text-white  rounded-md px-4 py-1 hover:bg-red-600"
+          onClick={resetTasks}
+        >
+          Reset Tasks
         </button>
 
         <div className="bg-red-500 text-white rounded-md  px-4 py-1  hover:bg-red-600">

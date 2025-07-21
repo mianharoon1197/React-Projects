@@ -9,15 +9,15 @@ function App() {
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
-  //const totalPersons = tasks.reduce((sum, task) => sum + task.value, 0);
+  const totalPersons = tasks.reduce((sum, task) => sum + task.value, 0);
 
   useEffect(() => {
     localStorage.setItem("TodoTasks", JSON.stringify(tasks));
-  }, [tasks]); 
+  }, [tasks]);
   useEffect(() => {
     const timer = setInterval(() => {
       setDateTime(new Date());
-    }, 1000); 
+    }, 1000);
 
     return () => clearInterval(timer);
   }, []);
@@ -29,13 +29,17 @@ function App() {
     //alert("Task added successfully");
   };
 
-  const resetTasks = () => {
+  const resetPersons = () => {
     const updatedTasks = tasks.map((task) => ({
       ...task,
       value: 0,
     }));
     setTasks(updatedTasks);
   };
+
+  const resetTasks = ()=>{
+    setTasks([])
+  }
 
   const increment = (id) => {
     setTasks(
@@ -47,9 +51,7 @@ function App() {
   const decrement = (id) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id  
-          ? { ...task, value: task.value - 1 }
-          : task
+        task.id === id ? { ...task, value: task.value - 1 } : task
       )
     );
   };
@@ -67,8 +69,9 @@ function App() {
     <>
       <Navbar
         counter={tasks.length}
-        ///counter={totalPersons}
+        persons={totalPersons}
         addTask={addTask}
+        resetPersons={resetPersons}
         resetTasks={resetTasks}
         currentTime={dateTime}
       />
