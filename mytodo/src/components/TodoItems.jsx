@@ -76,7 +76,7 @@ function TodoItems({ tasks, increment, decrement, deleteTask, editTask }) {
                 : "hover:bg-gray-500"
             }`}
           >
-            {isEditing ? "Save" : "Edit"}
+            {isEditing ?  "Save" : "Edit"}
           </button>
           <button
             onClick={() => deleteTask(tasks.id)}
