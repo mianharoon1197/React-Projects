@@ -5,7 +5,6 @@ import TodoList from "./components/TodoList.jsx";
 function App() {
   const [dateTime, setDateTime] = useState(new Date());
   const [tasks, setTasks] = useState(() => {
-    //geting tasks in localStorage
     const savedTodos = localStorage.getItem("TodoTasks");
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
@@ -14,13 +13,11 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("TodoTasks", JSON.stringify(tasks));
-  }, [tasks]); //updats localStorage whenever tasks changess
-
-  //for time
+  }, [tasks]); 
   useEffect(() => {
     const timer = setInterval(() => {
       setDateTime(new Date());
-    }, 1000); // Updates every second
+    }, 1000); 
 
     return () => clearInterval(timer);
   }, []);
@@ -50,7 +47,7 @@ function App() {
   const decrement = (id) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id && task.value > 0
+        task.id === id  
           ? { ...task, value: task.value - 1 }
           : task
       )
