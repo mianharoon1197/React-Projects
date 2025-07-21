@@ -4,19 +4,19 @@ import Navbar from "./components/Navbar.jsx";
 import TodoList from "./components/TodoList.jsx";
 function App() {
   const [dateTime, setDateTime] = useState(new Date());
-  const [tasks, setTasks] = useState(()=>{//geting tasks in localStorage
+  const [tasks, setTasks] = useState(() => {
+    //geting tasks in localStorage
     const savedTodos = localStorage.getItem("TodoTasks");
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
-  
 
   //const totalPersons = tasks.reduce((sum, task) => sum + task.value, 0);
 
-useEffect(()=>{
-localStorage.setItem("TodoTasks",JSON.stringify(tasks))
-},[tasks])//updats localStorage whenever tasks changess
+  useEffect(() => {
+    localStorage.setItem("TodoTasks", JSON.stringify(tasks));
+  }, [tasks]); //updats localStorage whenever tasks changess
 
-//for time
+  //for time
   useEffect(() => {
     const timer = setInterval(() => {
       setDateTime(new Date());
@@ -32,14 +32,13 @@ localStorage.setItem("TodoTasks",JSON.stringify(tasks))
     //alert("Task added successfully");
   };
 
-const resetTasks = () => {
-  const updatedTasks = tasks.map((task) => ({
-    ...task,        
-    value: 0       
-  }));
-  setTasks(updatedTasks);
-};
-
+  const resetTasks = () => {
+    const updatedTasks = tasks.map((task) => ({
+      ...task,
+      value: 0,
+    }));
+    setTasks(updatedTasks);
+  };
 
   const increment = (id) => {
     setTasks(
@@ -51,7 +50,9 @@ const resetTasks = () => {
   const decrement = (id) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id && task.value > 0 ? { ...task, value: task.value - 1 } : task
+        task.id === id && task.value > 0
+          ? { ...task, value: task.value - 1 }
+          : task
       )
     );
   };
