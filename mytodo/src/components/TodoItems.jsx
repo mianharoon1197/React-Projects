@@ -1,13 +1,11 @@
-//for handling todo items
-import { useState,useEffect,useRef } from "react";
+//for handling todo item
+import { useState, useEffect, useRef } from "react";
 
 function TodoItems({ tasks, increment, decrement, deleteTask, editTask }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(tasks.text);
 
-
-    const inputRef = useRef(null); 
-
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -16,7 +14,7 @@ function TodoItems({ tasks, increment, decrement, deleteTask, editTask }) {
   }, [isEditing]);
   return (
     <>
-      <div className="p-6 ml-20 flex gap-1">
+      <div className="flex justify-center items-center p-5 gap-2">
         <button
           className="bg-gray-400 text-white px-3 py-1 hover:bg-gray-500"
           onClick={() => increment(tasks.id)}
@@ -31,26 +29,34 @@ function TodoItems({ tasks, increment, decrement, deleteTask, editTask }) {
           -
         </button>
 
-        <div className="bg-yellow-400 text-white py-2 px-6 rounded-md hover:bg-yellow-500">
+        <div
+          className={`text-white py-2 px-6 rounded-md 
+    ${
+      tasks.value >= 0
+        ? "bg-yellow-400 hover:bg-yellow-500"
+        : "bg-blue-400 hover:bg-blue-500"
+    }`}
+        >
           {tasks.value} Person
         </div>
         <div>
           <input
-            ref={inputRef} 
+            ref={inputRef}
             disabled={!isEditing}
             onChange={(e) => setEditText(e.target.value)}
             value={editText}
             className="p-2 w-32 text-center"
             type="text"
-             onKeyDown={(e) => {
-            //for ading tsks by entering
-            if (e.key === "Enter") {
-              if (isEditing) {
-                editTask(tasks.id, editText);
+            onKeyDown={(e) => {
+              //for ading tsks by entering
+              if (e.key === "Enter") {
+                if (isEditing) {
+                  if (editText.trim() === "") return;
+                  editTask(tasks.id, editText);
+                }
+                setIsEditing(!isEditing);
               }
-              setIsEditing(!isEditing);
-            }
-          }}
+            }}
           ></input>
         </div>
 
@@ -58,11 +64,17 @@ function TodoItems({ tasks, increment, decrement, deleteTask, editTask }) {
           <button
             onClick={() => {
               if (isEditing) {
+                if (editText.trim() === "") return;
                 editTask(tasks.id, editText);
               }
               setIsEditing(!isEditing);
             }}
-            className="bg-gray-400 text-white px-2 py-1 rounded-md hover:bg-gray-500"
+            disabled={isEditing && editText.trim() === ""}
+            className={`bg-gray-400 text-white px-2 py-1 rounded-md ${
+              isEditing && !editText.trim()
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-gray-500"
+            }`}
           >
             {isEditing ? "Save" : "Edit"}
           </button>
