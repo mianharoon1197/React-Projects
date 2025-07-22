@@ -1,20 +1,20 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo,resetPersons,resetTasks } from "../redux/todoSlice";
+import { addTodo, resetPersons, resetTasks } from "../redux/todoSlice";
 
 function Navbar() {
   const [inputValue, setInputValue] = useState("");
-  const {counter,persons}=useSelector((state)=>state.todo)
+  const { counter, persons } = useSelector((state) => state.todo);
   const [currentTime, setCurrentTime] = useState(new Date());
-  
+
   const dispatch = useDispatch();
 
-useEffect(() => {
-  const interval = setInterval(() => {
-    setCurrentTime(new Date());
-  }, 1000);
-  return () => clearInterval(interval);
-}, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -24,9 +24,9 @@ useEffect(() => {
           {counter}
         </div>
         <div className="bg-gray-400 text-white px-3 py-1 rounded-md hover:bg-gray-500">
-        {persons}
+          {persons}
         </div>
-        
+
         <input
           type="text"
           value={inputValue}
@@ -53,14 +53,14 @@ useEffect(() => {
 
         <button
           className="bg-red-500 text-white  rounded-md px-4 py-1 hover:bg-red-600"
-          onClick={()=>dispatch(resetPersons())}
+          onClick={() => dispatch(resetPersons())}
         >
           Reset Number of Persons
         </button>
 
         <button
           className="bg-red-500 text-white  rounded-md px-4 py-1 hover:bg-red-600"
-          onClick={()=>dispatch(resetTasks())}
+          onClick={() => dispatch(resetTasks())}
         >
           Reset Tasks
         </button>
