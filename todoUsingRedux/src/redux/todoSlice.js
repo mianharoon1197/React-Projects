@@ -1,7 +1,13 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-  todos: [],
+  todos: [
+    {
+      id: nanoid(),
+      text: "Harry",
+      value: 0,
+    },
+  ],
   counter: 0,
   persons: 0,
 };
