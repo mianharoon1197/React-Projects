@@ -8,7 +8,7 @@ const initialState = {
       value: 0,
     },
   ],
-  counter: 0,
+  counter: 1,
   persons: 0,
 };
 
